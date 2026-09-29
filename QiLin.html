@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QiLin Studio — Webs profesionales para negocios locales en Madrid</title>
+  <meta name="description" content="Estudio web independiente en Madrid. Creamos sitios web profesionales, multilingües y optimizados para móvil para negocios locales.">
+  <meta property="og:title" content="QiLin Studio — Webs profesionales para negocios locales">
+  <meta property="og:description" content="Estudio web independiente en Madrid. Webs claras, profesionales y multilingües para pequeños negocios.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>麒</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:         #0A0A0A;
+      --bg-raised:  #141414;
+      --bg-subtle:  #1A1A1A;
+      --text:       #E8E4DF;
+      --text-sec:   #8A857E;
+      --text-dim:   #5A5650;
+      --accent:     #7C9A82;
+      --accent-dim: #5C7A62;
+      --border:     #2A2A2A;
+      --border-lt:  #222;
+      --font-d:     'Space Grotesk', system-ui, sans-serif;
+      --font-b:     'Inter', system-ui, sans-serif;
+      --nav-h:      60px;
+      --max-w:      1080px;
+      --warn:       #D4885C;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto !important; }
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+
+    body {
+      font-family: var(--font-b);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* ===== SKIP LINK ===== */
+    .skip-link {
+      position: absolute; top: -100%; left: 1rem;
+      background: var(--accent); color: var(--bg);
+      padding: 0.5rem 1rem; z-index: 300;
+      font-weight: 600; font-size: 0.875rem;
+    }
+    .skip-link:focus { top: 0.5rem; }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      height: var(--nav-h); z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .nav.scrolled { border-bottom-color: var(--border); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 100%;
+    }
+    .nav-logo {
+      font-family: var(--font-d); font-weight: 700; font-size: 1.05rem;
+      letter-spacing: -0.01em; color: var(--text);
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-links { display: none; gap: 2rem; }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 500; color: var(--text-sec);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      display: none; padding: 0.5rem 1.15rem;
+      font-size: 0.82rem; font-weight: 600;
+      background: var(--accent); color: var(--bg);
+      border: none; min-height: auto;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent-dim); }
+
+    /* Language toggle */
+    .lang-toggle {
+      background: none; border: 1px solid var(--border);
+      color: var(--text-sec); padding: 0.25rem 0.55rem;
+      font-family: var(--font-d); font-size: 0.75rem; font-weight: 600;
+      min-height: 32px; display: flex; align-items: center;
+      transition: border-color 0.2s, color 0.2s;
+      letter-spacing: 0.02em;
+      position: relative;
+    }
+    .lang-toggle:hover { border-color: var(--text-sec); color: var(--text); }
+
+    .lang-dropdown {
+      position: absolute; top: calc(100% + 6px); right: 0;
+      background: var(--bg-raised); border: 1px solid var(--border);
+      min-width: 130px; z-index: 110;
+      display: none; flex-direction: column;
+    }
+    .lang-dropdown.open { display: flex; }
+    .lang-dropdown button {
+      background: none; border: none; color: var(--text-sec);
+      padding: 0.6rem 0.85rem; font-size: 0.82rem; font-weight: 500;
+      text-align: left; transition: background 0.15s, color 0.15s;
+      min-height: 40px;
+    }
+    .lang-dropdown button:hover { background: var(--bg-subtle); color: var(--text); }
+    .lang-dropdown button[aria-current="true"] { color: var(--accent); }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: flex; flex-direction: column; gap: 5px;
+      background: none; border: none; padding: 6px;
+      min-width: 44px; min-height: 44px;
+      align-items: center; justify-content: center; z-index: 101;
+    }
+    .nav-toggle span {
+      display: block; width: 20px; height: 2px;
+      background: var(--text); transition: all 0.3s;
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed; top: var(--nav-h); left: 0; width: 100%; bottom: 0;
+      background: var(--bg); z-index: 99;
+      display: flex; flex-direction: column;
+      padding: 2rem 1.25rem;
+      overflow-y: auto; -webkit-overflow-scrolling: touch;
+      transform: translateY(-100%);
+      opacity: 0; pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .mobile-menu.open {
+      transform: translateY(0);
+      opacity: 1; pointer-events: auto;
+    }
+    .mobile-menu a {
+      font-family: var(--font-d); font-size: 1.5rem; font-weight: 600;
+      color: var(--text); padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      display: block; transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu .mobile-cta-btn {
+      margin-top: 1.5rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.85rem 1.75rem;
+      font-family: var(--font-b); font-size: 0.9rem; font-weight: 600;
+      background: var(--accent); color: var(--bg); border: none;
+      min-height: 48px; width: 100%;
+    }
+    .mobile-lang {
+      display: flex; gap: 0.5rem; margin-top: auto; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-lang-btn {
+      padding: 0.5rem 1rem; background: none;
+      border: 1px solid var(--border);
+      font-family: var(--font-d); font-size: 0.85rem; font-weight: 600;
+      color: var(--text-sec); min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .mobile-lang-btn:hover { border-color: var(--text-sec); }
+    .mobile-lang-btn.active { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 5rem 0; }
+    .section-tag {
+      font-family: var(--font-d); font-size: 0.75rem; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-d); font-weight: 700;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      line-height: 1.2; margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .section-sub {
+      color: var(--text-sec); font-size: 1rem;
+      max-width: 540px; line-height: 1.65;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: calc(var(--nav-h) + 4rem);
+      padding-bottom: 4rem;
+      min-height: 80vh;
+      display: flex; align-items: center;
+    }
+    .hero-inner {
+      display: flex; flex-direction: column; gap: 2rem;
+    }
+    .hero h1 {
+      font-family: var(--font-d); font-weight: 700;
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      line-height: 1.1; letter-spacing: -0.03em;
+    }
+    .hero .hero-sub {
+      color: var(--text-sec); font-size: 1.05rem;
+      max-width: 480px; line-height: 1.6;
+    }
+    .hero-btns {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-b); font-size: 0.9rem; font-weight: 600;
+      border: none; min-height: 48px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent); color: var(--bg);
+    }
+    .btn-primary:hover { background: var(--accent-dim); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--text-sec); }
+
+    /* ===== SERVICES ===== */
+    .services-grid {
+      display: grid; grid-template-columns: 1fr;
+      gap: 2rem; margin-top: 2.5rem;
+    }
+    .service-card {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+    .service-card h3 {
+      font-family: var(--font-d); font-weight: 600;
+      font-size: 1.15rem; margin-bottom: 0.5rem;
+    }
+    .service-card p {
+      color: var(--text-sec); font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* ===== WORK ===== */
+    .work { background: var(--bg-raised); }
+    .project-card {
+      margin-top: 2.5rem;
+      display: grid; grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .project-preview {
+      position: relative; overflow: hidden;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+    }
+    .project-preview img {
+      width: 100%; height: auto;
+      display: block;
+    }
+    .project-badge {
+      position: absolute; top: 1rem; left: 1rem;
+      background: var(--bg); color: var(--text-sec);
+      font-family: var(--font-d); font-size: 0.7rem; font-weight: 600;
+      padding: 0.3rem 0.65rem; letter-spacing: 0.03em;
+    }
+    .project-info h3 {
+      font-family: var(--font-d); font-weight: 700;
+      font-size: 1.4rem; margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .project-type {
+      color: var(--accent); font-size: 0.85rem;
+      font-weight: 500; margin-bottom: 1rem;
+    }
+    .project-details {
+      display: flex; flex-direction: column; gap: 1rem;
+      margin-top: 1rem;
+    }
+    .project-detail h4 {
+      font-family: var(--font-d); font-size: 0.8rem;
+      font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 0.35rem;
+    }
+    .project-detail p {
+      color: var(--text-sec); font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 1.25rem; font-weight: 600; font-size: 0.9rem;
+      color: var(--accent); transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.7rem; }
+
+    /* ===== PROCESS ===== */
+    .process-grid {
+      display: grid; grid-template-columns: 1fr;
+      gap: 2rem; margin-top: 2.5rem;
+    }
+    .process-step {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+    .step-num {
+      font-family: var(--font-d); font-size: 0.8rem;
+      font-weight: 600; color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .process-step h3 {
+      font-family: var(--font-d); font-weight: 600;
+      font-size: 1.1rem; margin-bottom: 0.4rem;
+    }
+    .process-step p {
+      color: var(--text-sec); font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    /* ===== ABOUT ===== */
+    .about { background: var(--bg-raised); }
+    .about-content {
+      display: grid; grid-template-columns: 1fr;
+      gap: 2rem; margin-top: 2rem;
+    }
+    .about-text p {
+      color: var(--text-sec); font-size: 0.95rem;
+      line-height: 1.65; margin-bottom: 1rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-name {
+      font-family: var(--font-d); font-weight: 600;
+      color: var(--text); font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .about-values {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+    .about-value h4 {
+      font-family: var(--font-d); font-weight: 600;
+      font-size: 0.85rem; margin-bottom: 0.25rem;
+    }
+    .about-value p {
+      color: var(--text-dim); font-size: 0.82rem;
+      margin-bottom: 0;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      text-align: center;
+      padding: 5rem 0;
+    }
+    .contact .section-sub {
+      margin: 0 auto 2rem;
+    }
+    .contact-email {
+      display: inline-flex; align-items: center;
+      font-family: var(--font-d); font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 600; color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-email:hover {
+      color: var(--accent-dim);
+      border-color: var(--accent-dim);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1rem; text-align: center;
+    }
+    .footer-logo {
+      font-family: var(--font-d); font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer p {
+      color: var(--text-dim); font-size: 0.8rem;
+    }
+
+    /* ===== MOBILE CTA BAR ===== */
+    .mobile-cta-bar {
+      display: flex;
+      position: fixed; bottom: 0; left: 0; width: 100%;
+      z-index: 98; padding: 0.75rem 1.25rem;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+    }
+    .mobile-cta-bar .btn {
+      width: 100%; text-align: center;
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal { opacity: 1; transform: none; }
+    html.js-ready .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    html.js-ready .reveal.visible {
+      opacity: 1; transform: none;
+    }
+
+    /* ===== DESKTOP ===== */
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .nav-cta { display: inline-flex; }
+      .nav-toggle { display: none; }
+      .mobile-cta-bar { display: none; }
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+      .project-card { grid-template-columns: 1.2fr 1fr; align-items: start; }
+      .process-grid { grid-template-columns: repeat(4, 1fr); }
+      .about-content { grid-template-columns: 1fr; }
+      section { padding: 6rem 0; }
+      .hero { min-height: 85vh; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content" data-i18n="skip">Saltar al contenido</a>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <a href="#top" class="nav-logo" aria-label="QiLin Studio — Inicio">Qi<span>Lin</span> Studio</a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#servicios" data-i18n="nav_services">Servicios</a>
+        <a href="#trabajo" data-i18n="nav_work">Trabajo</a>
+        <a href="#proceso" data-i18n="nav_process">Proceso</a>
+        <a href="#sobre" data-i18n="nav_about">Sobre mí</a>
+      </nav>
+      <div class="nav-right">
+        <div style="position:relative">
+          <button class="lang-toggle" id="langToggle" aria-label="Cambiar idioma" aria-expanded="false">
+            ES <span style="margin-left:0.3rem;font-size:0.6rem">▾</span>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button data-lang="es" aria-current="true">Español</button>
+            <button data-lang="en">English</button>
+            <button data-lang="zh">中文</button>
+          </div>
+        </div>
+        <a href="#contacto" class="btn btn-primary nav-cta" data-i18n="nav_cta">Contactar</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="#servicios" data-i18n="nav_services">Servicios</a>
+    <a href="#trabajo" data-i18n="nav_work">Trabajo</a>
+    <a href="#proceso" data-i18n="nav_process">Proceso</a>
+    <a href="#sobre" data-i18n="nav_about">Sobre mí</a>
+    <a href="#contacto" class="mobile-cta-btn" data-i18n="nav_cta">Contactar</a>
+    <div class="mobile-lang">
+      <button class="mobile-lang-btn active" data-lang="es">ES</button>
+      <button class="mobile-lang-btn" data-lang="en">EN</button>
+      <button class="mobile-lang-btn" data-lang="zh">中文</button>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container">
+        <div class="hero-inner reveal">
+          <h1 data-i18n="hero_title">Webs profesionales para<br>negocios locales en Madrid.</h1>
+          <p class="hero-sub" data-i18n="hero_sub">Diseño y desarrollo webs claras, rápidas y preparadas para móvil. Para que tus clientes te encuentren, entiendan lo que ofreces y contacten contigo.</p>
+          <div class="hero-btns">
+            <a href="#contacto" class="btn btn-primary" data-i18n="hero_cta">Hablemos</a>
+            <a href="#trabajo" class="btn btn-outline" data-i18n="hero_work">Ver mi trabajo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="servicios">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-tag" data-i18n="services_tag">Servicios</p>
+          <h2 class="section-title" data-i18n="services_title">Qué puedo hacer por tu negocio</h2>
+          <p class="section-sub" data-i18n="services_sub">Tres servicios concretos adaptados a pequeños negocios que necesitan una presencia online profesional.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <h3 data-i18n="svc1_title">Web básica</h3>
+            <p data-i18n="svc1_desc">Una web de una página con toda la información esencial de tu negocio: qué haces, precios, horarios, ubicación y cómo contactarte. Optimizada para móvil y lista para publicar.</p>
+          </div>
+          <div class="service-card reveal">
+            <h3 data-i18n="svc2_title">Web multilingüe</h3>
+            <p data-i18n="svc2_desc">Tu web en español, inglés y otros idiomas que necesites. Ideal si tu negocio atiende a turistas o a una clientela internacional en Madrid.</p>
+          </div>
+          <div class="service-card reveal">
+            <h3 data-i18n="svc3_title">Puesta a punto digital</h3>
+            <p data-i18n="svc3_desc">Revisión y mejora de tu presencia online actual: perfil de Google Business, información básica en buscadores y conexión con tus redes sociales existentes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="work" id="trabajo">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-tag" data-i18n="work_tag">Trabajo</p>
+          <h2 class="section-title" data-i18n="work_title">Proyecto destacado</h2>
+          <p class="section-sub" data-i18n="work_sub">Un proyecto concepto que muestra cómo trabajo y qué puedo construir.</p>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-preview">
+            <!-- NOTE: The downloaded index.html has the real screenshot embedded as base64.
+                 For GitHub Pages deployment, either use the downloaded file directly,
+                 or place your screenshot as 'corte-madrid-screenshot.jpg' next to index.html -->
+            <img src="corte-madrid-screenshot.jpg" alt="Captura de pantalla del sitio web Corte Madrid mostrando la página de inicio con servicios y precios" data-i18n-alt="work_img_alt" width="900" height="1033" loading="eager">
+            <span class="project-badge" data-i18n="work_badge">Proyecto concepto</span>
+          </div>
+          <div class="project-info">
+            <h3>Corte Madrid</h3>
+            <p class="project-type" data-i18n="work_type">Web multilingüe · Barbería ficticia</p>
+            <div class="project-details">
+              <div class="project-detail">
+                <h4 data-i18n="work_problem_label">Problema</h4>
+                <p data-i18n="work_problem">Muchos negocios locales en Madrid no tienen web, o tienen una que no funciona bien en móvil, no muestra precios claros y no transmite confianza.</p>
+              </div>
+              <div class="project-detail">
+                <h4 data-i18n="work_built_label">Qué construí</h4>
+                <p data-i18n="work_built">Una web completa con servicios, precios, galería, información de ubicación y horarios, y un prototipo interactivo que simula cómo funcionaría un sistema de reservas.</p>
+              </div>
+              <div class="project-detail">
+                <h4 data-i18n="work_demo_label">Qué demuestra</h4>
+                <p data-i18n="work_demo">Diseño responsive, navegación en tres idiomas (ES/EN/ZH), accesibilidad, rendimiento y atención al detalle en cada elemento.</p>
+              </div>
+            </div>
+            <a href="https://qilin-studio.github.io/Corte-Madrid-demo/" target="_blank" rel="noopener" class="project-link" data-i18n="work_link">Ver demo en vivo →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" id="proceso">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-tag" data-i18n="process_tag">Proceso</p>
+          <h2 class="section-title" data-i18n="process_title">Cómo trabajo</h2>
+          <p class="section-sub" data-i18n="process_sub">Cuatro pasos, sin complicaciones.</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-step reveal">
+            <p class="step-num">01</p>
+            <h3 data-i18n="step1_title">Entender</h3>
+            <p data-i18n="step1_desc">Hablamos de tu negocio: qué haces, quiénes son tus clientes y qué necesitas que tu web comunique.</p>
+          </div>
+          <div class="process-step reveal">
+            <p class="step-num">02</p>
+            <h3 data-i18n="step2_title">Construir</h3>
+            <p data-i18n="step2_desc">Diseño y desarrollo la web. Te muestro avances para que puedas dar feedback en cada paso.</p>
+          </div>
+          <div class="process-step reveal">
+            <p class="step-num">03</p>
+            <h3 data-i18n="step3_title">Refinar</h3>
+            <p data-i18n="step3_desc">Ajustamos textos, imágenes y detalles hasta que todo esté exactamente como lo necesitas.</p>
+          </div>
+          <div class="process-step reveal">
+            <p class="step-num">04</p>
+            <h3 data-i18n="step4_title">Lanzar</h3>
+            <p data-i18n="step4_desc">Publicamos la web y te explico cómo funciona todo para que puedas mantenerla sin depender de nadie.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="sobre">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-tag" data-i18n="about_tag">Sobre mí</p>
+          <h2 class="section-title" data-i18n="about_title">Quién hay detrás</h2>
+        </div>
+        <div class="about-content reveal">
+          <div class="about-text">
+            <p class="about-name" data-i18n="about_name">Soy Yuqi, fundador de QiLin Studio.</p>
+            <p data-i18n="about_p1">Creo webs claras y profesionales para pequeños negocios en Madrid. Mi enfoque es directo: entender lo que necesita tu negocio, construirlo y dejarlo listo para usar.</p>
+            <p data-i18n="about_p2">Trabajo solo, lo que significa que hablas directamente conmigo en todo momento. Sin intermediarios, sin procesos complicados. Te cuento lo que puedo hacer, lo hago, y lo entrego.</p>
+            <p data-i18n="about_p3">Si tu negocio necesita una web que funcione bien, se vea profesional y sea fácil de usar para tus clientes — puedo ayudarte.</p>
+          </div>
+          <div class="about-values">
+            <div class="about-value">
+              <h4 data-i18n="val1_title">Trato directo</h4>
+              <p data-i18n="val1_desc">Sin intermediarios</p>
+            </div>
+            <div class="about-value">
+              <h4 data-i18n="val2_title">Diseño con propósito</h4>
+              <p data-i18n="val2_desc">Cada decisión tiene una razón</p>
+            </div>
+            <div class="about-value">
+              <h4 data-i18n="val3_title">Multilingüe</h4>
+              <p data-i18n="val3_desc">ES · EN · ZH</p>
+            </div>
+            <div class="about-value">
+              <h4 data-i18n="val4_title">Móvil primero</h4>
+              <p data-i18n="val4_desc">Tus clientes usan el teléfono</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contacto">
+      <div class="container reveal">
+        <p class="section-tag" data-i18n="contact_tag">Contacto</p>
+        <h2 class="section-title" data-i18n="contact_title">¿Necesitas una web para tu negocio?</h2>
+        <p class="section-sub" data-i18n="contact_sub">Escríbeme y cuéntame qué necesitas. Sin compromiso.</p>
+        <a href="mailto:qilinworkshop@gmail.com" class="contact-email">qilinworkshop@gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- MOBILE CTA BAR -->
+  <div class="mobile-cta-bar">
+    <a href="mailto:qilinworkshop@gmail.com" class="btn btn-primary" data-i18n="mobile_cta">Escríbeme</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-logo">Qi<span>Lin</span> Studio</p>
+      <p data-i18n="footer_copy">© 2026 QiLin Studio. Los proyectos concepto son ficticios y se identifican como tal.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    'use strict';
+
+    /* ===== TRANSLATIONS ===== */
+    const T = {
+      es: {
+        skip: 'Saltar al contenido',
+        nav_services: 'Servicios',
+        nav_work: 'Trabajo',
+        nav_process: 'Proceso',
+        nav_about: 'Sobre mí',
+        nav_cta: 'Contactar',
+        hero_title: 'Webs profesionales para<br>negocios locales en Madrid.',
+        hero_sub: 'Diseño y desarrollo webs claras, rápidas y preparadas para móvil. Para que tus clientes te encuentren, entiendan lo que ofreces y contacten contigo.',
+        hero_cta: 'Hablemos',
+        hero_work: 'Ver mi trabajo',
+        services_tag: 'Servicios',
+        services_title: 'Qué puedo hacer por tu negocio',
+        services_sub: 'Tres servicios concretos adaptados a pequeños negocios que necesitan una presencia online profesional.',
+        svc1_title: 'Web básica',
+        svc1_desc: 'Una web de una página con toda la información esencial de tu negocio: qué haces, precios, horarios, ubicación y cómo contactarte. Optimizada para móvil y lista para publicar.',
+        svc2_title: 'Web multilingüe',
+        svc2_desc: 'Tu web en español, inglés y otros idiomas que necesites. Ideal si tu negocio atiende a turistas o a una clientela internacional en Madrid.',
+        svc3_title: 'Puesta a punto digital',
+        svc3_desc: 'Revisión y mejora de tu presencia online actual: perfil de Google Business, información básica en buscadores y conexión con tus redes sociales existentes.',
+        work_tag: 'Trabajo',
+        work_title: 'Proyecto destacado',
+        work_sub: 'Un proyecto concepto que muestra cómo trabajo y qué puedo construir.',
+        work_img_alt: 'Captura de pantalla del sitio web Corte Madrid mostrando la página de inicio con servicios y precios',
+        work_badge: 'Proyecto concepto',
+        work_type: 'Web multilingüe · Barbería ficticia',
+        work_problem_label: 'Problema',
+        work_problem: 'Muchos negocios locales en Madrid no tienen web, o tienen una que no funciona bien en móvil, no muestra precios claros y no transmite confianza.',
+        work_built_label: 'Qué construí',
+        work_built: 'Una web completa con servicios, precios, galería, información de ubicación y horarios, y un prototipo interactivo que simula cómo funcionaría un sistema de reservas.',
+        work_demo_label: 'Qué demuestra',
+        work_demo: 'Diseño responsive, navegación en tres idiomas (ES/EN/ZH), accesibilidad, rendimiento y atención al detalle en cada elemento.',
+        work_link: 'Ver demo en vivo →',
+        process_tag: 'Proceso',
+        process_title: 'Cómo trabajo',
+        process_sub: 'Cuatro pasos, sin complicaciones.',
+        step1_title: 'Entender',
+        step1_desc: 'Hablamos de tu negocio: qué haces, quiénes son tus clientes y qué necesitas que tu web comunique.',
+        step2_title: 'Construir',
+        step2_desc: 'Diseño y desarrollo la web. Te muestro avances para que puedas dar feedback en cada paso.',
+        step3_title: 'Refinar',
+        step3_desc: 'Ajustamos textos, imágenes y detalles hasta que todo esté exactamente como lo necesitas.',
+        step4_title: 'Lanzar',
+        step4_desc: 'Publicamos la web y te explico cómo funciona todo para que puedas mantenerla sin depender de nadie.',
+        about_tag: 'Sobre mí',
+        about_title: 'Quién hay detrás',
+        about_name: 'Soy Yuqi, fundador de QiLin Studio.',
+        about_p1: 'Creo webs claras y profesionales para pequeños negocios en Madrid. Mi enfoque es directo: entender lo que necesita tu negocio, construirlo y dejarlo listo para usar.',
+        about_p2: 'Trabajo solo, lo que significa que hablas directamente conmigo en todo momento. Sin intermediarios, sin procesos complicados. Te cuento lo que puedo hacer, lo hago, y lo entrego.',
+        about_p3: 'Si tu negocio necesita una web que funcione bien, se vea profesional y sea fácil de usar para tus clientes — puedo ayudarte.',
+        val1_title: 'Trato directo',
+        val1_desc: 'Sin intermediarios',
+        val2_title: 'Diseño con propósito',
+        val2_desc: 'Cada decisión tiene una razón',
+        val3_title: 'Multilingüe',
+        val3_desc: 'ES · EN · ZH',
+        val4_title: 'Móvil primero',
+        val4_desc: 'Tus clientes usan el teléfono',
+        contact_tag: 'Contacto',
+        contact_title: '¿Necesitas una web para tu negocio?',
+        contact_sub: 'Escríbeme y cuéntame qué necesitas. Sin compromiso.',
+        mobile_cta: 'Escríbeme',
+        footer_copy: '© 2026 QiLin Studio. Los proyectos concepto son ficticios y se identifican como tal.',
+        doc_title: 'QiLin Studio — Webs profesionales para negocios locales en Madrid',
+        doc_desc: 'Estudio web independiente en Madrid. Creo sitios web profesionales, multilingües y optimizados para móvil para negocios locales.'
+      },
+      en: {
+        skip: 'Skip to content',
+        nav_services: 'Services',
+        nav_work: 'Work',
+        nav_process: 'Process',
+        nav_about: 'About',
+        nav_cta: 'Contact',
+        hero_title: 'Professional websites for<br>local businesses in Madrid.',
+        hero_sub: 'I design and build clear, fast, mobile-ready websites. So your customers can find you, understand what you offer, and get in touch.',
+        hero_cta: "Let's talk",
+        hero_work: 'See my work',
+        services_tag: 'Services',
+        services_title: 'What I can do for your business',
+        services_sub: 'Three focused services for small businesses that need a professional online presence.',
+        svc1_title: 'Basic website',
+        svc1_desc: 'A one-page website with all the essential information about your business: what you do, prices, hours, location, and how to contact you. Mobile-optimized and ready to publish.',
+        svc2_title: 'Multilingual website',
+        svc2_desc: 'Your website in Spanish, English, and any other languages you need. Ideal if your business serves tourists or an international clientele in Madrid.',
+        svc3_title: 'Digital tune-up',
+        svc3_desc: 'Review and improvement of your current online presence: Google Business profile, basic search visibility, and connection with your existing social media.',
+        work_tag: 'Work',
+        work_title: 'Featured project',
+        work_sub: 'A concept project showing how I work and what I can build.',
+        work_img_alt: 'Screenshot of the Corte Madrid website showing the homepage with services and pricing',
+        work_badge: 'Concept project',
+        work_type: 'Multilingual website · Fictional barber shop',
+        work_problem_label: 'Problem',
+        work_problem: "Many local businesses in Madrid don't have a website, or have one that doesn't work well on mobile, doesn't show clear pricing, and doesn't build trust.",
+        work_built_label: 'What I built',
+        work_built: 'A complete website with services, pricing, gallery, location and hours information, and an interactive prototype that simulates how a booking system would work.',
+        work_demo_label: 'What it demonstrates',
+        work_demo: 'Responsive design, trilingual navigation (ES/EN/ZH), accessibility, performance, and attention to detail in every element.',
+        work_link: 'View live demo →',
+        process_tag: 'Process',
+        process_title: 'How I work',
+        process_sub: 'Four steps, no complications.',
+        step1_title: 'Understand',
+        step1_desc: 'We talk about your business: what you do, who your customers are, and what you need your website to communicate.',
+        step2_title: 'Build',
+        step2_desc: 'I design and develop the site. I show you progress so you can give feedback at every step.',
+        step3_title: 'Refine',
+        step3_desc: 'We adjust text, images, and details until everything is exactly how you need it.',
+        step4_title: 'Launch',
+        step4_desc: 'We publish the site and I explain how everything works so you can maintain it independently.',
+        about_tag: 'About',
+        about_title: "Who's behind this",
+        about_name: "I'm Yuqi, founder of QiLin Studio.",
+        about_p1: 'I build clear, professional websites for small businesses in Madrid. My approach is straightforward: understand what your business needs, build it, and deliver it ready to use.',
+        about_p2: 'I work independently, which means you talk directly to me at all times. No middlemen, no complicated processes. I tell you what I can do, I do it, and I deliver it.',
+        about_p3: 'If your business needs a website that works well, looks professional, and is easy for your customers to use — I can help.',
+        val1_title: 'Direct communication',
+        val1_desc: 'No middlemen',
+        val2_title: 'Purposeful design',
+        val2_desc: 'Every decision has a reason',
+        val3_title: 'Multilingual',
+        val3_desc: 'ES · EN · ZH',
+        val4_title: 'Mobile first',
+        val4_desc: 'Your customers use their phones',
+        contact_tag: 'Contact',
+        contact_title: 'Need a website for your business?',
+        contact_sub: 'Write to me and tell me what you need. No commitment.',
+        mobile_cta: 'Write to me',
+        footer_copy: '© 2026 QiLin Studio. Concept projects are fictional and labeled accordingly.',
+        doc_title: 'QiLin Studio — Professional websites for local businesses in Madrid',
+        doc_desc: 'Independent web studio in Madrid. I build professional, multilingual, mobile-optimized websites for local businesses.'
+      },
+      zh: {
+        skip: '跳转到主要内容',
+        nav_services: '服务',
+        nav_work: '作品',
+        nav_process: '流程',
+        nav_about: '关于',
+        nav_cta: '联系',
+        hero_title: '为马德里本地商户打造<br>专业网站。',
+        hero_sub: '我设计和开发清晰、快速、适配手机的网站。让你的客户找到你，了解你的服务，并轻松联系你。',
+        hero_cta: '聊聊',
+        hero_work: '查看作品',
+        services_tag: '服务',
+        services_title: '我能为你的生意做什么',
+        services_sub: '三项具体服务，专为需要专业线上形象的小型商户设计。',
+        svc1_title: '基础网站',
+        svc1_desc: '一个包含所有核心信息的单页网站：你做什么、价格、营业时间、地址和联系方式。针对手机优化，即建即用。',
+        svc2_title: '多语言网站',
+        svc2_desc: '用西班牙语、英语和其他你需要的语言呈现你的网站。如果你的生意面向游客或马德里的国际客户，这是理想选择。',
+        svc3_title: '数字形象优化',
+        svc3_desc: '检查和改善你现有的线上形象：Google Business 资料、基础搜索可见度以及与现有社交媒体的连接。',
+        work_tag: '作品',
+        work_title: '重点项目',
+        work_sub: '一个概念项目，展示我的工作方式和建设能力。',
+        work_img_alt: 'Corte Madrid 网站截图，展示首页的服务和价格',
+        work_badge: '概念项目',
+        work_type: '多语言网站 · 虚构理发店',
+        work_problem_label: '问题',
+        work_problem: '马德里许多本地商户没有网站，或者现有网站在手机上体验差、价格不清晰、缺乏信任感。',
+        work_built_label: '我做了什么',
+        work_built: '一个完整的网站，包含服务、价格、照片展示、位置和营业时间信息，以及一个模拟预约系统运作方式的互动原型。',
+        work_demo_label: '展示了什么',
+        work_demo: '响应式设计、三语导航（ES/EN/ZH）、无障碍访问、性能优化以及对每个细节的关注。',
+        work_link: '查看在线演示 →',
+        process_tag: '流程',
+        process_title: '我的工作方式',
+        process_sub: '四个步骤，简单直接。',
+        step1_title: '了解',
+        step1_desc: '我们聊聊你的生意：你做什么、客户是谁、你的网站需要传达什么信息。',
+        step2_title: '建设',
+        step2_desc: '我设计并开发网站。每一步都让你看到进展，随时可以反馈。',
+        step3_title: '完善',
+        step3_desc: '调整文字、图片和细节，直到一切完全符合你的要求。',
+        step4_title: '上线',
+        step4_desc: '发布网站并向你说明所有功能，让你可以独立维护。',
+        about_tag: '关于',
+        about_title: '谁在做这件事',
+        about_name: '我是 Yuqi，QiLin Studio 的创始人。',
+        about_p1: '我为马德里的小型商户创建清晰、专业的网站。我的方法很直接：理解你的生意需求，把网站做出来，交付即用。',
+        about_p2: '我独立工作，这意味着你全程直接和我沟通。没有中间人，没有复杂流程。我告诉你我能做什么，然后做好交付。',
+        about_p3: '如果你的生意需要一个好用、专业、让客户容易使用的网站——我可以帮忙。',
+        val1_title: '直接沟通',
+        val1_desc: '没有中间人',
+        val2_title: '有目的的设计',
+        val2_desc: '每个决定都有原因',
+        val3_title: '多语言',
+        val3_desc: 'ES · EN · ZH',
+        val4_title: '移动优先',
+        val4_desc: '你的客户用手机浏览',
+        contact_tag: '联系',
+        contact_title: '你的生意需要一个网站吗？',
+        contact_sub: '写信告诉我你的需求。无需承诺。',
+        mobile_cta: '写信给我',
+        footer_copy: '© 2026 QiLin Studio。概念项目为虚构，并已明确标注。',
+        doc_title: 'QiLin Studio — 为马德里本地商户打造专业网站',
+        doc_desc: '马德里独立网页工作室。我为本地商户创建专业、多语言、适配手机的网站。'
+      }
+    };
+
+    const LANG_LABELS = { es: 'ES', en: 'EN', zh: '中文' };
+    let currentLang = 'es';
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.title = T[lang].doc_title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.content = T[lang].doc_desc;
+
+      // Text content
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang][key] !== undefined) {
+          if (key === 'hero_title') {
+            el.innerHTML = T[lang][key];
+          } else {
+            el.textContent = T[lang][key];
+          }
+        }
+      });
+
+      // Alt text
+      document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+        const key = el.getAttribute('data-i18n-alt');
+        if (T[lang][key] !== undefined) el.alt = T[lang][key];
+      });
+
+      // Language toggle
+      const toggle = document.getElementById('langToggle');
+      if (toggle) toggle.firstChild.textContent = LANG_LABELS[lang] + ' ';
+
+      // Dropdown
+      document.querySelectorAll('.lang-dropdown button').forEach(btn => {
+        btn.setAttribute('aria-current', btn.dataset.lang === lang ? 'true' : 'false');
+      });
+
+      // Mobile lang buttons
+      document.querySelectorAll('.mobile-lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      // ARIA labels
+      const navToggle = document.getElementById('navToggle');
+      const ariaLabels = {
+        es: { open: 'Abrir menú', close: 'Cerrar menú', lang: 'Cambiar idioma', nav: 'Navegación principal' },
+        en: { open: 'Open menu', close: 'Close menu', lang: 'Change language', nav: 'Main navigation' },
+        zh: { open: '打开菜单', close: '关闭菜单', lang: '切换语言', nav: '主导航' }
+      };
+      if (navToggle) {
+        const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-label', isOpen ? ariaLabels[lang].close : ariaLabels[lang].open);
+      }
+      if (toggle) toggle.setAttribute('aria-label', ariaLabels[lang].lang);
+      const navEl = document.querySelector('.nav-links');
+      if (navEl) navEl.setAttribute('aria-label', ariaLabels[lang].nav);
+
+      localStorage.setItem('qilin-lang', lang);
+    }
+
+    /* ===== LANGUAGE TOGGLE ===== */
+    const langToggle = document.getElementById('langToggle');
+    const langDropdown = document.getElementById('langDropdown');
+
+    langToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = langDropdown.classList.toggle('open');
+      langToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    langDropdown.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        applyLanguage(this.dataset.lang);
+        langDropdown.classList.remove('open');
+        langToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.querySelectorAll('.mobile-lang-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        applyLanguage(this.dataset.lang);
+      });
+    });
+
+    document.addEventListener('click', function() {
+      langDropdown.classList.remove('open');
+      langToggle.setAttribute('aria-expanded', 'false');
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && langDropdown.classList.contains('open')) {
+        langDropdown.classList.remove('open');
+        langToggle.setAttribute('aria-expanded', 'false');
+        langToggle.focus();
+      }
+    });
+
+    /* ===== MOBILE MENU ===== */
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+
+    function openMenu() {
+      menuOpen = true;
+      navToggle.setAttribute('aria-expanded', 'true');
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const ariaLabels = { es: 'Cerrar menú', en: 'Close menu', zh: '关闭菜单' };
+      navToggle.setAttribute('aria-label', ariaLabels[currentLang] || ariaLabels.es);
+      const firstLink = mobileMenu.querySelector('a');
+      if (firstLink) firstLink.focus();
+      document.querySelector('main').setAttribute('inert', '');
+    }
+
+    function closeMenu() {
+      menuOpen = false;
+      navToggle.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      const ariaLabels = { es: 'Abrir menú', en: 'Open menu', zh: '打开菜单' };
+      navToggle.setAttribute('aria-label', ariaLabels[currentLang] || ariaLabels.es);
+      navToggle.focus();
+      document.querySelector('main').removeAttribute('inert');
+    }
+
+    navToggle.addEventListener('click', function() {
+      menuOpen ? closeMenu() : openMenu();
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && menuOpen) closeMenu();
+    });
+
+    // Close on desktop breakpoint
+    const mql = window.matchMedia('(min-width: 768px)');
+    mql.addEventListener('change', function(e) {
+      if (e.matches && menuOpen) closeMenu();
+    });
+
+    // Focus trap in mobile menu
+    mobileMenu.addEventListener('keydown', function(e) {
+      if (e.key !== 'Tab') return;
+      const focusable = [navToggle, ...mobileMenu.querySelectorAll('a, button')];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    });
+
+    /* ===== SCROLL EFFECT ===== */
+    const nav = document.querySelector('.nav');
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          nav.classList.toggle('scrolled', window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    /* ===== REVEAL ON SCROLL ===== */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+      document.documentElement.classList.add('js-ready');
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    }
+
+    /* ===== INIT LANGUAGE ===== */
+    const saved = localStorage.getItem('qilin-lang');
+    applyLanguage((saved && T[saved]) ? saved : 'es');
+
+  })();
+  </script>
+</body>
+</html>
