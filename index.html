@@ -337,11 +337,37 @@
       line-height: 1.55;
     }
     .project-link {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      margin-top: 1.25rem; font-weight: 600; font-size: 0.9rem;
-      color: var(--accent); transition: gap 0.2s;
-    }
-    .project-link:hover { gap: 0.7rem; }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-width: 190px;
+  min-height: 52px;
+  padding: 0.9rem 1.5rem;
+  margin-top: 1.5rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  font-family: var(--font-b);
+  font-size: 1rem;
+  font-weight: 700;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    gap 0.2s ease;
+  box-shadow: 0 6px 20px rgba(124, 154, 130, 0.14);
+}
+
+.project-link:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent-dim);
+  transform: translateY(-2px);
+  gap: 0.8rem;
+  box-shadow: 0 8px 24px rgba(124, 154, 130, 0.2);
+}
 
     /* ===== PROCESS ===== */
     .process-grid {
